@@ -4,7 +4,7 @@ var path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -62,7 +62,7 @@ app.delete("/api/notes/:id", function(req, res){
 
   });
   res.json(notes);
-  
+
   fs.writeFileSync(__dirname + "/db/db.json", JSON.stringify(notes), function (err, data) {
     if (err) throw err;
     console.log("Deleted!")
